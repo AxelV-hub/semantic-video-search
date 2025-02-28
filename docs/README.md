@@ -71,7 +71,7 @@ This project is a **semantic search engine** designed to retrieve **relevant vid
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your_username/semantic-video-search.git
+git clone https://github.com/AxelV-hub/semantic-video-search
 cd semantic-video-search
 
 # Create a virtual environment (optional but recommended)

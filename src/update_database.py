@@ -109,8 +109,8 @@ def update_database(video_folder_name, videos_dico, chunks_dico, time_stamp_dico
 		print("No new videos need to be processed.") if main_verbose else None
 
 	# Create the Transcription folder and the Temp audio folder if they don't exist
-	if not os.path.exists("_transcriptions_files"):
-		os.makedirs("_transcriptions_files")
+	if not os.path.exists("data/transcriptions"):
+		os.makedirs("data/transcriptions")
 	if not os.path.exists("_audio_files"):
 		os.makedirs("_audio_files")
 
@@ -140,7 +140,7 @@ def update_database(video_folder_name, videos_dico, chunks_dico, time_stamp_dico
 			# Construct the file path of the video, the audio and the transcription
 			video_path = os.path.join(video_folder_name, f"{video_name}.mp4")
 			audio_path = os.path.join("_audio_files", f"{video_name}.wav")
-			script_path = os.path.join("_transcriptions_files", f"{video_name}.txt")
+			script_path = os.path.join("data/transcriptions", f"{video_name}.txt")
 
 			# Convert video to audio
 			print(f"Converting video file '{video_name}' to audio...") if main_verbose else None
@@ -173,11 +173,11 @@ def update_database(video_folder_name, videos_dico, chunks_dico, time_stamp_dico
 			print(f"Transcription of '{video_name}' chunked successfully") if main_verbose else None
 
 			# Saving the chunks_dico, videos_dico and time_stamp_dico in the database
-			with open('Database/chunks_dico.pickle', 'wb') as handle:
+			with open('data/database/chunks_dico.pickle', 'wb') as handle:
 				pickle.dump(chunks_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-			with open('Database/videos_dico.pickle', 'wb') as handle:
+			with open('data/database/videos_dico.pickle', 'wb') as handle:
 				pickle.dump(videos_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-			with open('Database/time_stamp_dico.pickle', 'wb') as handle:
+			with open('data/database/time_stamp_dico.pickle', 'wb') as handle:
 				pickle.dump(time_stamp_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 		# Write total running time for each step to the output file
@@ -208,7 +208,7 @@ if __name__ == "__main__":
 
 	# Some global variables that will be used later
 	video_folder_name = "_video_files"
-	transcibe_folder_name = "_transcriptions_files"
+	transcibe_folder_name = "data/transcriptions"
 
 	# Try to load the embeddings list and the dictionnaries from the database if they exist, otherwise create them and force updating the database
 	if force:   # Si l'option force est activée, on repart d'une base de données vide
@@ -217,19 +217,19 @@ if __name__ == "__main__":
 		time_stamp_dico = {}
 		data_semantic_cosine = []
 		# clean the database folder and the transcription folder (delete every file inside them)
-		if os.path.exists("Database"):
-			shutil.rmtree("Database")
-		if os.path.exists("_transcriptions_files"):
-			shutil.rmtree("_transcriptions_files")
+		if os.path.exists("data/database"):
+			shutil.rmtree("data/database")
+		if os.path.exists("data/transcriptions"):
+			shutil.rmtree("data/transcriptions")
 	else:
 		if not os.path.exists("Database"):
 			os.makedirs("Database")
 		try:
-			with open('Database/videos_dico.pickle', 'rb') as handle:
+			with open('data/database/videos_dico.pickle', 'rb') as handle:
 				videos_dico = pickle.load(handle)
-			with open('Database/chunks_dico.pickle', 'rb') as handle:
+			with open('data/database/chunks_dico.pickle', 'rb') as handle:
 				chunks_dico = pickle.load(handle)
-			with open('Database/time_stamp_dico.pickle', 'rb') as handle:
+			with open('data/database/time_stamp_dico.pickle', 'rb') as handle:
 				time_stamp_dico = pickle.load(handle)
 			print("Database loaded.") if main_verbose else None
 		except:
@@ -242,10 +242,10 @@ if __name__ == "__main__":
 	videos_dico, chunks_dico, time_stamp_dico = update_database(video_folder_name, videos_dico, chunks_dico, time_stamp_dico, main_verbose=main_verbose)
 
 	# Save the videos_dico, chunks_dico, time_stamp_dico, data_semantic_cosine and data_BM25 in the database (piclke files)
-	with open('Database/videos_dico.pickle', 'wb') as handle:
+	with open('data/database/videos_dico.pickle', 'wb') as handle:
 		pickle.dump(videos_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-	with open('Database/chunks_dico.pickle', 'wb') as handle:
+	with open('data/database/chunks_dico.pickle', 'wb') as handle:
 		pickle.dump(chunks_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-	with open('Database/time_stamp_dico.pickle', 'wb') as handle:
+	with open('data/database/time_stamp_dico.pickle', 'wb') as handle:
 		pickle.dump(time_stamp_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
 

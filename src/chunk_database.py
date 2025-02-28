@@ -92,7 +92,7 @@ def chunk_database_function(chunks_dico, videos_dico, time_stamps_dico, enforce 
 	"""
 	print("Chunking database...") if main_verbose else None
 
-	transcription_folder = "_transcriptions_files"
+	transcription_folder = "data/transcriptions"
 
 	# Check in the chunks_dico which video has already been chunked, and which has not
 	# If enforce is True, we rechunk all the videos
@@ -151,14 +151,14 @@ if __name__ == "__main__":
 
 	# Try to load the embeddings list and the dictionnaries from the database if they exist, otherwise print a message to inform the user that the database is empty
 	print("Loading the database...") if main_verbose else None
-	if not os.path.exists("Database"):
-		os.makedirs("Database")
+	if not os.path.exists("data/database"):
+		os.makedirs("data/database")
 	try:
-		with open('Database/videos_dico.pickle', 'rb') as handle:
+		with open('data/database/videos_dico.pickle', 'rb') as handle:
 			videos_dico = pickle.load(handle)
-		with open('Database/chunks_dico.pickle', 'rb') as handle:
+		with open('data/database/chunks_dico.pickle', 'rb') as handle:
 			chunks_dico = pickle.load(handle)
-		with open('Database/time_stamp_dico.pickle', 'rb') as handle:
+		with open('data/database/time_stamp_dico.pickle', 'rb') as handle:
 			time_stamp_dico = pickle.load(handle)
 		print("Database loaded.") if main_verbose else None
 	except:
@@ -172,9 +172,9 @@ if __name__ == "__main__":
 
 	# Save the videos_dico, chunks_dico, time_stamp_dico, data_semantic_cosine and data_BM25 in the database (piclke files)
 	print("Saving the database...") if main_verbose else None
-	with open('Database/videos_dico.pickle', 'wb') as handle:
+	with open('data/database/videos_dico.pickle', 'wb') as handle:
 		pickle.dump(videos_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-	with open('Database/chunks_dico.pickle', 'wb') as handle:
+	with open('data/database/chunks_dico.pickle', 'wb') as handle:
 		pickle.dump(chunks_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-	with open('Database/time_stamp_dico.pickle', 'wb') as handle:
+	with open('data/database/time_stamp_dico.pickle', 'wb') as handle:
 		pickle.dump(time_stamp_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)

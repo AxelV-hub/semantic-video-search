@@ -353,13 +353,13 @@ def chunk_text_add_dico(text_file_path, chunks_dico, videos_dico, time_stamps_di
 		time_stamps_dico[ID] = (start_timestamp, end_timestamp)
 
 	# Saving the chunks, videos and timestamps dico in the database
-	if not os.path.exists("Database"):
-		os.makedirs("Database")
-	with open('Database/chunks_dico.pickle', 'wb') as handle:
+	if not os.path.exists("data/database"):
+		os.makedirs("data/database")
+	with open('data/database/chunks_dico.pickle', 'wb') as handle:
 		pickle.dump(chunks_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-	with open('Database/videos_dico.pickle', 'wb') as handle:
+	with open('data/database/videos_dico.pickle', 'wb') as handle:
 		pickle.dump(videos_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
-	with open('Database/time_stamp_dico.pickle', 'wb') as handle:
+	with open('data/database/time_stamp_dico.pickle', 'wb') as handle:
 		pickle.dump(time_stamps_dico, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 	print("Chunking done.") if main_verbose else None

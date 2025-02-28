@@ -315,19 +315,19 @@ if __name__ == "__main__":
 
     # Clean the indexes in the database (data_BM25, data_TFIDF, data_semantic_cosine, data_semantic_cosine_vOpenAI, data_ngram) before updating them
     if indexing_model_to_update == None:
-        if os.path.exists("Database/data_semantic_cosine.pickle"):
-            os.remove("Database/data_semantic_cosine.pickle")
-        if os.path.exists("Database/data_semantic_cosine_vOpenAI.pickle"):
-            os.remove("Database/data_semantic_cosine_vOpenAI.pickle")
-        if os.path.exists("Database/data_BM25.pickle"):
-            os.remove("Database/data_BM25.pickle")
-        if os.path.exists("Database/data_TFIDF.pickle"):
-            os.remove("Database/data_TFIDF.pickle")
-        if os.path.exists("Database/data_ngram.pickle"):
-            os.remove("Database/data_ngram.pickle")
+        if os.path.exists("data/database/data_semantic_cosine.pickle"):
+            os.remove("data/database/data_semantic_cosine.pickle")
+        if os.path.exists("data/database/data_semantic_cosine_vOpenAI.pickle"):
+            os.remove("data/database/data_semantic_cosine_vOpenAI.pickle")
+        if os.path.exists("data/database/data_BM25.pickle"):
+            os.remove("data/database/data_BM25.pickle")
+        if os.path.exists("data/database/data_TFIDF.pickle"):
+            os.remove("data/database/data_TFIDF.pickle")
+        if os.path.exists("data/database/data_ngram.pickle"):
+            os.remove("data/database/data_ngram.pickle")
     else:
-        if os.path.exists(f"Database/data_{indexing_model_to_update}.pickle"):
-            os.remove(f"Database/data_{indexing_model_to_update}.pickle")
+        if os.path.exists(f"data/database/data_{indexing_model_to_update}.pickle"):
+            os.remove(f"data/database/data_{indexing_model_to_update}.pickle")
 
 
     # Try to load the embeddings list and the dictionnaries from the database if they exist, otherwise print a message to inform the user that the database is empty
@@ -335,7 +335,7 @@ if __name__ == "__main__":
     if not os.path.exists("Database"):
         os.makedirs("Database")
     try:
-        with open('Database/chunks_dico.pickle', 'rb') as handle:
+        with open('data/database/chunks_dico.pickle', 'rb') as handle:
             chunks_dico = pickle.load(handle)
         print("Database loaded.") if main_verbose else None
     except:
@@ -350,15 +350,15 @@ if __name__ == "__main__":
         
         # Save the videos_dico, chunks_dico, time_stamp_dico, data_semantic_cosine and data_BM25 in the database (piclke files)
         print("Saving the database...") if main_verbose else None
-        with open('Database/data_semantic_cosine.pickle', 'wb') as handle:
+        with open('data/database/data_semantic_cosine.pickle', 'wb') as handle:
             pickle.dump(data_semantic_cosine, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        with open('Database/data_semantic_cosine_vOpenAI.pickle', 'wb') as handle:
+        with open('data/database/data_semantic_cosine_vOpenAI.pickle', 'wb') as handle:
             pickle.dump(data_semantic_cosine_vOpenAI, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        with open('Database/data_BM25.pickle', 'wb') as handle:
+        with open('data/database/data_BM25.pickle', 'wb') as handle:
             pickle.dump(data_BM25, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        with open('Database/data_TFIDF.pickle', 'wb') as handle:
+        with open('data/database/data_TFIDF.pickle', 'wb') as handle:
             pickle.dump(data_TFIDF, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        with open('Database/data_ngram.pickle', 'wb') as handle:
+        with open('data/database/data_ngram.pickle', 'wb') as handle:
             pickle.dump(data_ngram, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
@@ -371,7 +371,7 @@ if __name__ == "__main__":
 
         # Saving only the updated database
         print("Saving the database...") if main_verbose else None
-        with open('Database/data_semantic_cosine_vOpenAI.pickle', 'wb') as handle:
+        with open('data/database/data_semantic_cosine_vOpenAI.pickle', 'wb') as handle:
             pickle.dump(data_semantic_cosine_vOpenAI, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     elif indexing_model_to_update == "cosine_semantic":
@@ -382,7 +382,7 @@ if __name__ == "__main__":
 
         # Saving only the updated database
         print("Saving the database...") if main_verbose else None
-        with open('Database/data_semantic_cosine.pickle', 'wb') as handle:
+        with open('data/database/data_semantic_cosine.pickle', 'wb') as handle:
             pickle.dump(data_semantic_cosine, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     elif indexing_model_to_update == "BM25":
@@ -393,7 +393,7 @@ if __name__ == "__main__":
 
         # Saving only the updated database
         print("Saving the database...") if main_verbose else None
-        with open('Database/data_BM25.pickle', 'wb') as handle:
+        with open('data/database/data_BM25.pickle', 'wb') as handle:
             pickle.dump(data_BM25, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     elif indexing_model_to_update == "TFIDF":
@@ -404,7 +404,7 @@ if __name__ == "__main__":
 
         # Saving only the updated database
         print("Saving the database...") if main_verbose else None
-        with open('Database/data_TFIDF.pickle', 'wb') as handle:
+        with open('data/database/data_TFIDF.pickle', 'wb') as handle:
             pickle.dump(data_TFIDF, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     elif indexing_model_to_update == "ngram":
@@ -415,7 +415,7 @@ if __name__ == "__main__":
 
         # Saving only the updated database
         print("Saving the database...") if main_verbose else None
-        with open('Database/data_ngram.pickle', 'wb') as handle:
+        with open('data/database/data_ngram.pickle', 'wb') as handle:
             pickle.dump(data_ngram, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     else:

@@ -103,8 +103,8 @@ def score_ranking(reco_model, reco_model_parameters, chunks_dico, videos_dico, t
             total_seconds.append(minutes * 60 + seconds + centiseconds / 100)
         return total_seconds
 
-    # Open pickle file of testing_material.pkl in the _testing_files folder
-    with open('_testing_files/testing_material.pkl', 'rb') as handle:
+    # Open pickle file of testing_material.pkl in the data/testing folder
+    with open('data/testing/testing_material.pkl', 'rb') as handle:
         correct_video_name, correct_timestamps, testing_queries = pickle.load(handle)
 
     # For each query, we retrieve the recommendations 
@@ -205,7 +205,7 @@ def compare_models(data_semantic_cosine, data_semantic_cosine_vOpenAI, data_BM25
     }
 
     # take the number of testing queries from the testing_material.pkl file
-    with open('_testing_files/testing_material.pkl', 'rb') as handle:
+    with open('data/testing/testing_material.pkl', 'rb') as handle:
         correct_video_name, correct_timestamps, testing_queries = pickle.load(handle)
     nb_testing_queries = len(testing_queries)
 
@@ -408,21 +408,21 @@ if __name__ == '__main__':
     if not os.path.exists("Database"):
         os.makedirs("Database")
     try:
-        with open('Database/videos_dico.pickle', 'rb') as handle:
+        with open('data/database/videos_dico.pickle', 'rb') as handle:
             videos_dico = pickle.load(handle)
-        with open('Database/chunks_dico.pickle', 'rb') as handle:
+        with open('data/database/chunks_dico.pickle', 'rb') as handle:
             chunks_dico = pickle.load(handle)
-        with open('Database/time_stamp_dico.pickle', 'rb') as handle:
+        with open('data/database/time_stamp_dico.pickle', 'rb') as handle:
             time_stamp_dico = pickle.load(handle)
-        with open('Database/data_semantic_cosine.pickle', 'rb') as handle:
+        with open('data/database/data_semantic_cosine.pickle', 'rb') as handle:
             data_semantic_cosine = pickle.load(handle)
-        with open('Database/data_semantic_cosine_vOpenAI.pickle', 'rb') as handle:
+        with open('data/database/data_semantic_cosine_vOpenAI.pickle', 'rb') as handle:
             data_semantic_cosine_vOpenAI = pickle.load(handle)
-        with open('Database/data_BM25.pickle', 'rb') as handle:
+        with open('data/database/data_BM25.pickle', 'rb') as handle:
             data_BM25 = pickle.load(handle)
-        with open('Database/data_TFIDF.pickle', 'rb') as handle:
+        with open('data/database/data_TFIDF.pickle', 'rb') as handle:
             data_TFIDF = pickle.load(handle)
-        with open('Database/data_ngram.pickle', 'rb') as handle:
+        with open('data/database/data_ngram.pickle', 'rb') as handle:
             data_ngram = pickle.load(handle)
         print("Database loaded.") if main_verbose else None
     except:

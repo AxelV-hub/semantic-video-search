@@ -377,7 +377,7 @@ if __name__ == '__main__':
 
     Dependencies:
         - Requires preprocessed embeddings and chunk dictionaries.
-        - Requires `Database/videos_dico.pickle`, `Database/chunks_dico.pickle`, and `Database/time_stamp_dico.pickle`.
+        - Requires `data/database/videos_dico.pickle`, `data/database/chunks_dico.pickle`, and `data/database/time_stamp_dico.pickle`.
 
     Outputs:
         - JSON formatted recommendations are printed to standard output.
@@ -400,21 +400,21 @@ if __name__ == '__main__':
     if not os.path.exists("Database"):
         os.makedirs("Database")
     try:
-        with open('Database/videos_dico.pickle', 'rb') as handle:
+        with open('data/database/videos_dico.pickle', 'rb') as handle:
             videos_dico = pickle.load(handle)
-        with open('Database/chunks_dico.pickle', 'rb') as handle:
+        with open('data/database/chunks_dico.pickle', 'rb') as handle:
             chunks_dico = pickle.load(handle)
-        with open('Database/time_stamp_dico.pickle', 'rb') as handle:
+        with open('data/database/time_stamp_dico.pickle', 'rb') as handle:
             time_stamp_dico = pickle.load(handle)
-        # with open('Database/data_semantic_cosine.pickle', 'rb') as handle:
+        # with open('data/database/data_semantic_cosine.pickle', 'rb') as handle:
         #     data_semantic_cosine = pickle.load(handle)
-        with open('Database/data_semantic_cosine_vOpenAI.pickle', 'rb') as handle:
+        with open('data/database/data_semantic_cosine_vOpenAI.pickle', 'rb') as handle:
             data_semantic_cosine_vOpenAI = pickle.load(handle)
-        # with open('Database/data_BM25.pickle', 'rb') as handle:
+        # with open('data/database/data_BM25.pickle', 'rb') as handle:
         #     data_BM25 = pickle.load(handle)
-        # with open('Database/data_TFIDF.pickle', 'rb') as handle:
+        # with open('data/database/data_TFIDF.pickle', 'rb') as handle:
         #     data_TFIDF = pickle.load(handle)
-        # with open('Database/data_ngram.pickle', 'rb') as handle:
+        # with open('data/database/data_ngram.pickle', 'rb') as handle:
         #     data_ngram = pickle.load(handle)
         print("Database loaded.") if main_verbose else None
     except:

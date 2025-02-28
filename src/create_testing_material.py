@@ -45,7 +45,7 @@ def generate_testing_questions(chunks_dico, videos_dico, time_stamp_dico, n_ques
 
 	# open the testing material
 	try : 
-		with open('_testing_files/testing_material.pkl', 'rb') as handle:
+		with open('data/testing/testing_material.pkl', 'rb') as handle:
 			correct_video_name, correct_timestamps, testing_queries = pickle.load(handle)
 	except:
 		testing_queries = []
@@ -99,7 +99,7 @@ def generate_testing_questions(chunks_dico, videos_dico, time_stamp_dico, n_ques
 			validated_questions += 1
 			# save the testing material
 			testing_material = (correct_video_name, correct_timestamps, testing_queries)
-			with open('_testing_files/testing_material.pkl', 'wb') as handle:
+			with open('data/testing/testing_material.pkl', 'wb') as handle:
 				pickle.dump(testing_material, handle, protocol=pickle.HIGHEST_PROTOCOL)
 		elif user_input == "n":
 			print("The question will not be saved.") if main_verbose else None
@@ -110,7 +110,7 @@ def generate_testing_questions(chunks_dico, videos_dico, time_stamp_dico, n_ques
 			validated_questions += 1
 			# save the testing material
 			testing_material = (correct_video_name, correct_timestamps, testing_queries)
-			with open('_testing_files/testing_material.pkl', 'wb') as handle:
+			with open('data/testing/testing_material.pkl', 'wb') as handle:
 				pickle.dump(testing_material, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
@@ -145,7 +145,7 @@ if __name__ == "__main__":
 		time_stamp_dico = pickle.load(handle)
 
 	# open testing material
-	with open('_testing_files/testing_material.pkl', 'rb') as handle:
+	with open('data/testing/testing_material.pkl', 'rb') as handle:
 		correct_video_name, correct_timestamps, testing_queries = pickle.load(handle)
 
 	print(f"Number of questions in the testing material: {len(testing_queries)}")
